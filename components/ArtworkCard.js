@@ -31,7 +31,7 @@ export default function ArtworkCard(objectID){
         return null;
     }
 }
-export function ArtworkCard(){
+export function ArtworkCardDetail(objectID){
     const fetcher = (...args) => fetch(...args).then(res => res.json());
     const { data, error} = useSWR(`https://collectionapi.metmuseum.org/public/collection/v1/objects/objectID${objectID}`, fetcher)
 
