@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import { useAtom } from "jotai";
 import { searchHistoryAtom } from "@/store";
-export default function search(){
+export default function Search(){
     const { register, handleSubmit, formState: { isInvalid } } = useForm({
         defaultValues:{
             q: "",

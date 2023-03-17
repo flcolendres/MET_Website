@@ -29,10 +29,6 @@ export default function Artwork(){
         if(data){
             let results = [];
             let filteredResults = validObjectIDList.objectIDs.filter(x => data.objectIDs?.includes(x));
-            // for (let i = 0; i < data?.objectIDs?.length; i += PER_PAGE) {
-            //     const chunk = data?.objectIDs.slice(i, i + PER_PAGE);
-            //     results.push(chunk);
-            // }        
             for (let i = 0; i < filteredResults.length; i += PER_PAGE) {
                 const chunk = filteredResults.slice(i, i + PER_PAGE);
                 results.push(chunk);
@@ -42,26 +38,7 @@ export default function Artwork(){
         }
         if(error)
             <Error statusCode={404} />
-    }, [data]);
-
-    // if (artworkList){
-    //     <Row className="gy-4">
-    //         {artworkList.length > 0 && artworkList[page - 1].map((elem) => (<Col lg={3} key={elem}><ArtworkCard objectID={elem} /></Col>))}
-    //         {artworkList.length == 0 && 
-    //             <Card><Card.Body><h4>Nothing Here</h4></Card.Body></Card>
-    //         }
-    //     </Row>
-    //     {artworkList.length > 0 && 
-    //     <Pagination>
-    //         <Pagination.Prev onClick={previousPage}/>
-    //         <Pagination.Item>{page}</Pagination.Item>
-    //         <Pagination.Next onClick={nextPage}/>
-    //     </Pagination>
-    //     }
-    // }
-    // else {
-    //     null
-    // }
+    }, [data, error]);
     return(
         <>
        {artworkList ? 

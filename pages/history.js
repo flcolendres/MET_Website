@@ -7,7 +7,7 @@ import styles from '@/styles/History.module.css';
 
 
 
-export default function history(){
+export default function History(){
     const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
     const router = useRouter()
     let parsedHistory = [];
@@ -35,7 +35,7 @@ export default function history(){
             <Container>
                 <ListGroup>
                     {parsedHistory.map((historyItem, index)=>(
-                <ListGroup.Item className={styles.historyListItem} onClick={e => historyClicked(e, index)}>
+                <ListGroup.Item key={index} className={styles.historyListItem} onClick={e => historyClicked(e, index)}>
                     {Object.keys(historyItem).map(key => (<>{key}: <strong>{historyItem[key]}</strong>&nbsp;</>))}
                     <Button className="float-end" variant="danger" size="sm" onClick={e => removeHistoryClicked(e, index)}>&times;</Button>
                 </ListGroup.Item>
