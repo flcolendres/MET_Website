@@ -13,8 +13,8 @@ export default function ArtworkCardDetail(props){
     async function favouritesClicked(){
         if(showAdded){
             // setFavouritesList(current => current.filter(fav => fav != props.id));
-            // setFavouritesList(await removeFromFavourites(current => current.filter(fav => fav != props.id))) 
-            setFavouritesList(await removeFromFavourites(current => current.filter(props.id))) 
+            // setFavouritesList(await removeFromFavourites(current => current.filter(fav => fav != props.id)))
+            setFavouritesList(await removeFromFavourites(props.id)) 
             setShowAdded(false);
             console.log(`${favouritesList} removed`);
         }
@@ -26,7 +26,7 @@ export default function ArtworkCardDetail(props){
         }
     }
     useEffect(()=>{
-        setShowAdded(favouritesList?.includes(objectID))
+        setShowAdded(favouritesList?.includes(props.id))
        }, [favouritesList])       
     if (data){
         return(
