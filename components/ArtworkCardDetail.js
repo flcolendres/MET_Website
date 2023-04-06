@@ -1,25 +1,33 @@
 import  useSWR  from "swr"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { favouritesAtom } from '@/store';
 import { Button, Card } from "react-bootstrap";
+import { addToFavourites, removeFromFavourites } from "@/lib/userData";
 import Error from "next/error";
 export default function ArtworkCardDetail(props){
     const fetcher = (...args) => fetch(...args).then(res => res.json());
     const { data, error} = useSWR(props.id ? `https://collectionapi.metmuseum.org/public/collection/v1/objects/${props.id}` : null, fetcher)
     const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
-    const [showAdded, setShowAdded] = useState(favouritesList.includes(props.id));
-    function favouritesClicked(){
+    const [showAdded, setShowAdded] = useState(false);
+    async function favouritesClicked(){
         if(showAdded){
-            setFavouritesList(current => current.filter(fav => fav != props.id));
-            console.log(`${favouritesList} removed`);
+            // setFavouritesList(current => current.filter(fav => fav != props.id));
+            // setFavouritesList(await removeFromFavourites(current => current.filter(fav => fav != props.id))) 
+            setFavouritesList(await removeFromFavourites(current => current.filter(props.id))) 
             setShowAdded(false);
+            console.log(`${favouritesList} removed`);
         }
         else{
-            setFavouritesList(current => [...current,  props.id]);
+            // setFavouritesList(current => [...current,  props.id]);
+            // setFavouritesList(await addToFavourites(current => [...current,  props.id])) 
+            setFavouritesList(await addToFavourites(props.id)) 
             setShowAdded(true);
         }
     }
+    useEffect(()=>{
+        setShowAdded(favouritesList?.includes(objectID))
+       }, [favouritesList])       
     if (data){
         return(
             <>

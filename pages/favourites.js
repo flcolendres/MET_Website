@@ -6,8 +6,8 @@ import { Col, Row } from "react-bootstrap";
 
 export default function Favourites(props){
     const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
-    console.log(`${favouritesList} is favourites list`);
-
+    if(!favouritesList) return null;
+    
     return(
         <>
             {favouritesList.length > 0 ? 

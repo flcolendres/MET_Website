@@ -22,7 +22,7 @@ export default function Login(props){
             await updateAtoms();
             router.push('/favourites');
         } catch (err) {
-            setWarning(`Unable to find user ${user}`);
+            setWarning(err.message);
         }
     }
     async function updateAtoms(){

@@ -18,7 +18,7 @@ export default function Register(props){
             await registerUser(user, password, password2);
             router.push('/login');
         } catch (err) {
-            setWarning(`Unable to register user ${user}`);
+            setWarning(err.message);
         }
     }
 
